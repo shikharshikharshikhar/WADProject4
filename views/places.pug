@@ -1,23 +1,29 @@
 doctype html 
 html
     head 
-        title Places Test
+        title Places Debug
         script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
     body 
-        h1 Places Test
+        h1 JavaScript Debug Test
+        
+        // Test button with inline JavaScript
+        button(onclick="alert('Inline JavaScript works!')") Test Inline JS
+        
+        // Test button that calls external function
+        button(onclick="testFunction()") Test External JS
         
         form
-            label Label: 
-            input#label(type='text', value='Test Place')
-            br
-            label Address: 
-            input#address(type='text', value='123 Main Street, New York, NY')
-            br
-            button(type='button', onclick='testButton()') Test Button
-            button(type='button', onclick='addPlace()') Add Place
+            input#label(type='text', placeholder='Label')
+            input#address(type='text', placeholder='Address')
+            button(type='button', onclick="addPlace()") Add Place
         
-        div#debug
-        
-        script(src="/places.js")
+        // Test script block
         script.
-            console.log("Template loaded");
+            console.log("Inline script executed!");
+            function testFunction() {
+                alert("External function works!");
+                console.log("testFunction called");
+            }
+        
+        // Your external script
+        script(src="/places.js")
