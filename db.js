@@ -11,7 +11,9 @@ class PlacesDB {
         await this.db.schema('Place', [
             { name: 'id', type: 'INTEGER' },
             { name: 'label', type: 'TEXT' },
-            { name: 'address', type: 'TEXT' }
+            { name: 'address', type: 'TEXT' },
+            { name: 'lat', type: 'NUMERIC' },    // New column
+            { name: 'lng', type: 'NUMERIC' }     // New column
         ], 'id');
     }
 
@@ -20,10 +22,12 @@ class PlacesDB {
         return places;
     }
 
-    async createPlace(label, address) {
+    async createPlace(label, address, lat, lng) {
         const id = await this.db.create('Place', [
             { column: 'label', value: label },
-            { column: 'address', value: address }
+            { column: 'address', value: address },
+            { column: 'lat', value: lat },       // New field
+            { column: 'lng', value: lng }        // New field
         ]);
         return id;
     }
