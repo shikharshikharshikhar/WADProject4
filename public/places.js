@@ -33,3 +33,31 @@ const addPlace = async () => {
         alert('Error adding place: ' + error.message);
     }
 };
+
+const loadPlaces = async () => {
+    try {
+        const response = await axios.get('/places');
+        const tbody = document.querySelector('tbody');
+        
+        // Clear existing rows
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+
+        if (response && response.data && response.data.places) {
+            for (const place of response.data.places) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${place.label}</td>
+                    <td>${place.address}</td>
+                    <td>
+                        <button class='btn btn-danger btn-sm' type='button' onclick='deletePlace(${place.id})'>Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+    } catch (error) {
+        console.error('Error loading places:', error);
+    }
+};
