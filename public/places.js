@@ -27,6 +27,24 @@ const addPlace = async () => {
         // Clear form
         document.querySelector("#label").value = '';
         document.querySelector("#address").value = '';
+    }
+    
+    try {
+        console.log("Making API call...");
+        const response = await axios.put('/places', { 
+            label: label, 
+            address: address 
+        });
+        console.log("Response:", response.data);
+        
+        alert('Place added successfully!');
+        
+        // Clear form
+        document.querySelector("#label").value = '';
+        document.querySelector("#address").value = '';
+        
+        // ADD THIS LINE:
+        await loadPlaces();
         
     } catch (error) {
         console.error('Error adding place:', error);
