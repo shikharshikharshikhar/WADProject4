@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Database = require('dbcmps369');
 
 class PlacesDB {
